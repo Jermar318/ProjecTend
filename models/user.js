@@ -1,0 +1,1 @@
+// # Sequelize model for user
