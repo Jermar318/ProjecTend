@@ -1,1 +1,1 @@
-// # Sequelize model for project
+
