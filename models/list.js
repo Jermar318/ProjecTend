@@ -1,16 +1,24 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const List = sequelize.define('List', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
+  class List extends Model {}
+
+  List.init(
+    {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      boardId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    boardId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  }, {});
+    {
+      sequelize,
+      modelName: 'List',
+    }
+  );
 
   List.associate = (models) => {
     List.belongsTo(models.Board, { foreignKey: 'boardId' });
