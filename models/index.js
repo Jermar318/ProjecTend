@@ -7,13 +7,38 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 // Import models
+const User = require('./user')(sequelize);
 const Board = require('./board')(sequelize);
-const List = require('./list')(sequelize);
 const Card = require('./card')(sequelize);
 
-// Define associations
-Board.associate({ List });
-List.associate({ Board, Card });
-Card.associate({ List });
+// Define relationships
+Board.hasMany(Card, {
+  foreignKey: 'boardId',
+  onDelete: 'CASCADE',
+});
 
-module.exports = { sequelize, Board, List, Card };
+Card.belongsTo(Board, {
+  foreignKey: 'boardId',
+});
+
+User.hasMany(Board, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
+
+Board.belongsTo(User, {
+  foreignKey: 'userId',
+});
+
+Card.hasOne(User, {
+  foreignKey: 'assignee',
+  onDelete: 'SET NULL',
+});
+
+// This might be wrong
+User.belongsTo(Card, {
+  foreignKey: 'assignee',
+});
+
+
+module.exports = { sequelize, Board, User, Card };
