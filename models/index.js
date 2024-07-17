@@ -35,6 +35,7 @@ Card.hasOne(User, {
   onDelete: 'SET NULL',
 });
 
+// This might be wrong
 User.belongsTo(Card, {
   foreignKey: 'assignee',
 });

@@ -11,6 +11,11 @@ router.get('/', async (req, res) => {
 // GET single card by id
 router.get('/:id', async (req, res) => {
     const card = await Card.findByPk(req.params.id);
+
+    if (!card) {
+        res.status(404).json({ message: 'Card not found' });
+        return;
+    }
     res.json(card);
     });
 
@@ -25,6 +30,13 @@ router.put('/:id', async (req, res) => {
     const card = await Card.findByPk(req.params.id);
     await card.update(req.body);
     res.json(card);
+});
+
+// Delete a card by id
+router.delete('/:id', async (req, res) => {
+    const card = await Card.findByPk(req.params.id);
+    await card.destroy();
+    res.json({ deleted: true });
 });
 
 module.exports = router;
