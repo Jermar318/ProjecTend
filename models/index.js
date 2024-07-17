@@ -7,9 +7,9 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 // Import models
+const User = require('./user')(sequelize);
 const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
-const User = require('./user')(sequelize);
 
 // Define relationships
 Board.hasMany(Card, {
