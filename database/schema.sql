@@ -31,4 +31,6 @@ CREATE TABLE Card (
     board_id INT NOT NULL,
     assignee_id INT,
     FOREIGN KEY (user_id) REFERENCES User(id)
+    FOREIGN KEY (board_id) REFERENCES Board(id)
+    FOREIGN KEY (assignee_id) REFERENCES User(id)
 );
