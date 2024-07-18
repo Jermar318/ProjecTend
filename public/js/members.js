@@ -1,1 +1,0 @@
-// # jQuery handlers for member 

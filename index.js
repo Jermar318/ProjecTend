@@ -1,16 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
-const boardRouter = require('./routes/board');
-const listRouter = require('./routes/list');
-const cardRouter = require('./routes/card');
+const boardRouter = require('./routes/api/board-routes');
+const cardRouter = require('./routes/api/card-routes');
+const userRouter = require('./routes/api/user-routes');
+const commentRouter = require('./routes/api/comment-routes'); // Add commentRouter
 
 const app = express();
 app.use(bodyParser.json());
 
 app.use('/boards', boardRouter);
-app.use('/lists', listRouter);
 app.use('/cards', cardRouter);
+app.use('/comment', commentRouter); 
+app.use('/user', userRouter); 
+
 
 const PORT = process.env.PORT || 3001;
 
