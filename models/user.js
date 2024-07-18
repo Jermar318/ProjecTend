@@ -11,14 +11,8 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      username: {
-        type: DataTypes.VARCHAR(30),
-        allowNull: false,
-        primaryKey: true,
-      },  
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,

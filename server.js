@@ -3,6 +3,7 @@ const routes = require('./routes');
 const { sequelize }  = require('./models');
 const exphbs = require('express-handlebars');
 
+
 require('dotenv').config();
 
 const hbs = exphbs.create();
@@ -15,6 +16,8 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
