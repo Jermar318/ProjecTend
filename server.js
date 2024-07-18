@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const express = require('express');
 const routes = require('./routes');
 const { sequelize }  = require('./models');
@@ -23,4 +21,3 @@ app.use(routes);
 sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
->>>>>>> 85d3fdf2c10a50d560fd7b6072cd644747824fc3
