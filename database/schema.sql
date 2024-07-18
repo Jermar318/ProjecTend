@@ -10,7 +10,10 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+<<<<<<<<< Temporary merge branch 1
 
+=========
+>>>>>>>>> Temporary merge branch 2
 CREATE TABLE boards (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -19,7 +22,10 @@ CREATE TABLE boards (
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+<<<<<<<<< Temporary merge branch 1
 
+=========
+>>>>>>>>> Temporary merge branch 2
 CREATE TABLE card (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
