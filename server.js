@@ -1,26 +1,28 @@
 const express = require('express');
-const routes = require('./routes');
-const { sequelize }  = require('./models');
+const routes = require('./routes'); // Assuming you have a routes file
+const { sequelize } = require('./models'); // Assuming you have Sequelize models
 const exphbs = require('express-handlebars');
-
+const path = require('path');
 
 require('dotenv').config();
-
-const hbs = exphbs.create();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Configure Handlebars
+const hbs = exphbs.create();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
+// Routes
+app.use(routes); // Assuming routes are defined in a separate file
 
+// Sequelize sync
 sequelize.sync({ force: true }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+    app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
 });
