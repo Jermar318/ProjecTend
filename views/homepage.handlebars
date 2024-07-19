@@ -1,0 +1,40 @@
+    <div class="progress-bar">
+      <div class="progress-bar-inner" style="width: {{progress}}%;"></div>
+    </div>
+    <div class="columns">
+      <div class="column" id="unassigned-column">
+        <h2>Unassigned</h2>
+        <div id="unassigned-list" class="sortable-list">
+          <!-- Cards will be populated here -->
+        </div>
+        <form id="form-unassigned">
+          <input type="text" id="new-card-content-unassigned" placeholder="Card content">
+          <input type="text" id="new-card-assignee-unassigned" placeholder="Assignee">
+          <button type="submit">Add Card</button>
+        </form>
+      </div>
+
+      <div class="column" id="in-progress-column">
+        <h2>In Progress</h2>
+        <div id="in-progress-list" class="sortable-list">
+          <!-- Cards will be populated here -->
+        </div>
+        <form id="form-in-progress">
+          <input type="text" id="new-card-content-in-progress" placeholder="Card content">
+          <input type="text" id="new-card-assignee-in-progress" placeholder="Assignee">
+          <button type="submit">Add Card</button>
+        </form>
+      </div>
+
+      <div class="column" id="done-column">
+        <h2>Done</h2>
+        <div id="done-list" class="sortable-list">
+          <!-- Cards will be populated here -->
+        </div>
+        <form id="form-done">
+          <input type="text" id="new-card-content-done" placeholder="Card content">
+          <input type="text" id="new-card-assignee-done" placeholder="Assignee">
+          <button type="submit">Add Card</button>
+        </form>
+      </div>
+    </div>
