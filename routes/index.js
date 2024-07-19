@@ -1,6 +1,6 @@
 
 const router = require('express').Router();
-const apiRoutes = require("./api");
+const apiRoutes = require("./api/connector.js");
 
 router.use('/api', apiRoutes);
 
@@ -20,17 +20,23 @@ router.get('/login', async (req, res) => {
     }
 });
 
-router.get('/members', async (req, res) => {
+router.get('/signup', async (req, res) => {
     try {
-        res.render('members', {});
+        res.render('signup', {});
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-router.get('/project', async (req, res) => {
+router.get('/logout', async (req, res) => {
     try {
-        res.render('project', {});
+        if (req.session?.logged_in) {
+            req.session.destroy(() => {
+                res.redirect('/');
+                return;
+            });
+        }
+        res.render('logout');
     } catch (err) {
         res.status(500).json(err);
     }
