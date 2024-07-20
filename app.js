@@ -25,9 +25,8 @@ app.set('views', path.join(__dirname, 'views')); //  views are in the 'views' di
 app.use(express.static(path.join(__dirname, 'public'))); //  files from 'public'
 
 // Use routes
-app.get('signup', (req, res) => {
-  res.render('signup');
-});
+app.use('/login', loginRoutes);
+app.use('/signup', require('./routes/signup-routes'));
 
 // Start the server
 app.listen(PORT, () => {
