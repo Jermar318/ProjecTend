@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
       res.status(400).render('signup', {
         layout: 'signup',
         title: 'Signup',
-        error: 'Email already in use'
+        error: 'Email already in use', error
       });
       return;
     }
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
     res.status(500).render('signup', {
       layout: 'main',
       title: 'Signup',
-      error: 'An error occurred during signup'
+      error: 'An error occurred during signup', error
     });
   }
 });

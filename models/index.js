@@ -10,7 +10,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 const User = require('./user')(sequelize);
 const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
-const Comment = require('./comment')(sequelize);
+// const Comment = require('./comment')(sequelize);
 
 // Define relationships
 Board.hasMany(Card, {
@@ -31,26 +31,28 @@ Board.belongsTo(User, {
   foreignKey: 'userId',
 });
 
-Card.hasOne(User, {
-  foreignKey: 'assignee',
-  onDelete: 'SET NULL',
-});
+// Card.hasOne(User, {
+//   foreignKey: 'assignee',
+//   onDelete: 'SET NULL',
+// });
 
 // This might be wrong
-User.belongsTo(Card, {
-  foreignKey: 'assignee',
-});
+// User.belongsTo(Card, {
+//   foreignKey: 'assignee',
+// });
 
 // Define Comment relationships
-Comment.belongsTo(Card, {
-  foreignKey: 'cardId',
-  onDelete: 'CASCADE',
-});
+// Comment.belongsTo(Card, {
+//   foreignKey: 'cardId',
+//   onDelete: 'CASCADE',
+// });
 
-Comment.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE',
-});
+// Comment.belongsTo(User, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE',
+// });
 
 
-module.exports = { sequelize, Board, User, Card, Comment };
+module.exports = { sequelize, Board, User, Card, 
+  // Comment 
+};

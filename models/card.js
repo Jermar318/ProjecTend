@@ -33,11 +33,7 @@ module.exports = (sequelize) => {
         },
       },
       assignee: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
+        type: DataTypes.INTEGER
       }
     },
     {

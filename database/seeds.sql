@@ -13,7 +13,7 @@ INSERT INTO boards (title, description, user_id) VALUES
 
 -- Insert sample data into the cards table
 -- Assuming these cards belong to the first board
-INSERT INTO cards (title, user_id) VALUES
+INSERT INTO cards (title, description, status, boardId, assignee user_id) VALUES
 ('Card 1 for Board 1', 1),
 ('Card 2 for Board 1', 1),
 ('Card 3 for Board 1', 1);

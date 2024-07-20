@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
             res.status(401).render('login', {
                 layout: 'main',
                 title: 'Login',
-                error: 'Invalid email or password',
+                error: 'Invalid email or password', error,
                 logged_in: false
             });
         }
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
         res.status(500).render('login', {
             layout: 'main',
             title: 'Login',
-            error: 'An error occurred during login',
+            error: 'An error occurred during login', error,
             logged_in: false
         });
     }
