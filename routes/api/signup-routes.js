@@ -9,7 +9,12 @@ router.post('/', async (req, res) => {
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ error: 'Email already in use' });
+      res.status(400).render('signup', {
+        layout: 'signup',
+        title: 'Signup',
+        error: 'Email already in use', error
+      });
+      return;
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,7 +25,11 @@ router.post('/', async (req, res) => {
 
     res.status(200).json({ message: 'Signup successful. You can now log in.' });
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred during signup' });
+    res.status(500).render('signup', {
+      layout: 'main',
+      title: 'Signup',
+      error: 'An error occurred during signup', error
+    });
   }
 });
 

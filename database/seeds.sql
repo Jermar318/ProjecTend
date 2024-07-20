@@ -15,14 +15,9 @@ INSERT INTO card (title, description, status, user_id, board_id, assignee_id) VA
 ('Card 2', 'Description for Card 2', 'In Progress', 2, 1, 3),
 ('Card 3', 'Description for Card 3', 'Done', 3, 2, 1);
 
--- Seed data for 'tasks'
-INSERT INTO tasks (content, user_id, card_id) VALUES
-('Task 1 for Card 1', 1, 1),
-('Task 2 for Card 2', 2, 2),
-('Task 3 for Card 3', 3, 3);
-
--- Seed data for 'comments'
-INSERT INTO comments (content, user_id, card_id) VALUES
-('Comment 1 for Card 1', 1, 1),
-('Comment 2 for Card 2', 2, 2),
-('Comment 3 for Card 3', 3, 3);
+-- Insert sample data into the cards table
+-- Assuming these cards belong to the first board
+INSERT INTO cards (title, description, status, boardId, assignee user_id) VALUES
+('Card 1 for Board 1', 1),
+('Card 2 for Board 1', 1),
+('Card 3 for Board 1', 1);

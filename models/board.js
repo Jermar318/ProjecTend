@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -28,6 +32,7 @@ module.exports = (sequelize) => {
       sequelize,
       modelName: 'board',
       tableName: 'boards',
+      timestamps: true
     }
   );
 
