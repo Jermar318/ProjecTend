@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const routes = require('./routes'); // Assuming you have a routes file
 const { sequelize } = require('./models'); // Assuming you have Sequelize models
 const exphbs = require('express-handlebars');
@@ -18,6 +19,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true })); // to parse the body of POST requests
 
 // Routes
 app.use(routes); // Assuming routes are defined in a separate file

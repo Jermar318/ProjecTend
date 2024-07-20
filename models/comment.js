@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'comment',
+      tableName: 'comments',
     }
   );
 

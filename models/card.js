@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       assignee: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'user',
+          model: 'users',
           key: 'id',
         },
       }
@@ -43,6 +43,7 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'card',
+      tableName: 'cards',
     }
   );
 

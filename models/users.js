@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   class User extends Model { }
 
-  User.init(
+  Users.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -11,19 +11,26 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      email: {
+      username: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
+      email: {
+        type: DataTypes.STRING,
+      },
+    
     },
     {
       sequelize,
       timestamps: false,
       freezeTableName: true,
       underscored: true,
-      modelName: 'user',
+      modelName: 'users',
+      tableName: 'users',
     },
   );
 
