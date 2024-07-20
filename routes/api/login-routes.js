@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/users');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 // Render login page
 router.get('/', (req, res) => {
@@ -12,11 +12,16 @@ router.get('/', (req, res) => {
 
 // Handle login form submission
 router.post('/', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    // Find user by email
-    const user = await User.findOne({ where: { email } });
+    // Find user by username or email
+    const user = await User.findOne({
+      where: {
+        // Allow user to log in with either username or email
+        [sequelize.Op.or]: [{ username }, { email: username }]
+      }
+    });
 
     if (user && await bcrypt.compare(password, user.password)) {
       // Set up user session
@@ -27,7 +32,7 @@ router.post('/', async (req, res) => {
       res.status(401).render('login', {
         layout: 'main',
         title: 'Login',
-        error: 'Invalid email or password'
+        error: 'Invalid username or password' // Updated error message
       });
     }
   } catch (error) {

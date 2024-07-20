@@ -11,13 +11,13 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     content: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
-      type: DataTypes.TIMESTAMP,
-      defaultValue: DataTypes.NOW,
-      field: 'created_at'
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW // This sets the default value to the current time
     },
     userId: {
       type: DataTypes.INTEGER,

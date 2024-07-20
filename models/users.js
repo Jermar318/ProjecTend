@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   class User extends Model { }
 
-  Users.init(
+  User.init(
     {
       id: {
         type: DataTypes.INTEGER,

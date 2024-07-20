@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const Status = require('../constants/status');
+const Status = require('../public/scripts/status');
 
 module.exports = (sequelize) => {
   class Card extends Model {}

@@ -11,9 +11,10 @@ const User = require('./users')(sequelize);
 const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
 const Comment = require('./comment')(sequelize);
-const Task = require('./models/task.js')(sequelize); // Added this line
+const Task = require('./task.js')(sequelize);
 
 // Define relationships
+
 Board.hasMany(Card, {
   foreignKey: 'boardId',
   onDelete: 'CASCADE',
