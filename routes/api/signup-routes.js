@@ -3,8 +3,8 @@ const User = require('../../models/users');
 //const bcrypt = require('bcrypt');
 
 // Handle signup form submission
-router.post('/', async (req, res) => {
-  const { email, password } = req.body;
+router.post('/signup', async (req, res) => {
+  const { username, email, password } = req.body;
 
   try {
     const existingUser = await User.findOne({ where: { email } });
