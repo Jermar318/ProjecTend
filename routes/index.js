@@ -1,6 +1,6 @@
+
 const router = require('express').Router();
 const apiRoutes = require("./api/connector.js");
-//const isAuthenicated = require('../public/utils/isAuthenticated.js');
 
 router.use('/api', apiRoutes);
 

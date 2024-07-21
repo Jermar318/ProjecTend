@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const Status = require('../public/scripts/status');
+const Status = require('../constants/status');
 
 module.exports = (sequelize) => {
   class Card extends Model {}
@@ -39,7 +39,6 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'card',
-      tableName: 'cards',
     }
   );
 
