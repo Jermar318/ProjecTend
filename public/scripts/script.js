@@ -102,7 +102,6 @@ formTodo.addEventListener('submit', function (event) {
           return;
         }
         response.json().then((data) => {
-          console.log(data);
           var card = createCard(data.id, cardTitle, cardDescription, assignee);
           document.getElementById('todo-list').appendChild(card);
           document.getElementById('new-card-description-todo').value = '';

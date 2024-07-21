@@ -12,10 +12,8 @@ router.post('/', async (req, res) => {
 
     if (existingUser) {
       res.status(400).render('signup', {
-        // title: 'Signup',
         error: 'Email already in use'
       });
-      console.log("existing user found")
       return;
     }
 
@@ -36,26 +34,6 @@ router.post('/', async (req, res) => {
       error: 'An error occurred during signup', error
     });
   }
-
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-
-  //   // create new user
-  //   const newUser = await User.create({
-  //     email,
-  //     password: hashedPassword
-  //   });
-
-  //   req.session.user_id = newUser.id;
-  //   req.session.logged_in = true;
-
-  //   res.redirect('/signup');
-  // } catch (error) {
-  //   res.status(500).render('signup', {
-  //     layout: 'main',
-  //     title: 'Signup',
-  //     error: 'An error occurred during signup', error
-  //   });
-  // }
 });
 
 module.exports = router;

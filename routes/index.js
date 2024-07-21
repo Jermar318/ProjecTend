@@ -4,14 +4,6 @@ const apiRoutes = require("./api/connector.js");
 
 router.use('/api', apiRoutes);
 
-// Render signup page
-// router.get('/signup', (req, res) => {
-//     res.render('signup', {
-//     //   layout: 'signup',
-//     //   title: 'Signup'
-//     });
-//   });
-
 router.get('/', async (req, res) => {
     try {
         if (req.session.logged_in) {

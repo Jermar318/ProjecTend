@@ -8,27 +8,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 
 // Import models
 const User = require('./user')(sequelize);
-// const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
-
-// Define relationships
-// Board.hasMany(Card, {
-//   foreignKey: 'boardId',
-//   onDelete: 'CASCADE',
-// });
-
-// Card.belongsTo(Board, {
-//   foreignKey: 'boardId',
-// });
-
-// User.hasMany(Board, {
-//   foreignKey: 'userId',
-//   onDelete: 'CASCADE',
-// });
-
-// Board.belongsTo(User, {
-//   foreignKey: 'userId',
-// });
 
 Card.hasOne(User, {
   foreignKey: 'email',
@@ -41,7 +21,5 @@ User.belongsTo(Card, {
 });
 
 module.exports = { sequelize,
-  // Board, 
   User, Card, 
-  // Comment 
 };
