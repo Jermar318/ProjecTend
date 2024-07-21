@@ -1,8 +1,8 @@
 // Function to create a new card element
-function createCard(title, content, assignee) {
+function createCard(id, title, description, assigneeEmail) {
   var card = document.createElement('div');
   card.className = 'card';
-  card.innerHTML = `<h2>${title}</h2><p><strong>${assignee}</strong>: ${content}</p>`;
+  card.innerHTML = `<h2 data-id=${id}>${title}</h2><p><strong>${assigneeEmail}</strong>: ${description}</p>`;
 
   // Delete button
   var deleteBtn = document.createElement('button');
@@ -10,6 +10,11 @@ function createCard(title, content, assignee) {
   deleteBtn.className = 'delete-btn';
   deleteBtn.addEventListener('click', function () {
     card.parentNode.removeChild(card);
+    // Call the DELETE card API
+    fetch(`/api/cards/${id}`, {
+      method: 'DELETE'
+    });
+
     updateProgressBar(); // Update progress bar after being deleted
   });
 
@@ -28,12 +33,20 @@ var sortableOptions = {
     var columnId = itemEl.parentNode.id; // ID of the column where item was dropped
     console.log('Item dropped in column:', columnId);
 
-    // Check if item was dropped into Done column
-    if (event.to.id === 'done-list') {
-      updateProgressBar();
-    } else if (event.from.id === 'done-list') {
-      updateProgressBar();
-    }
+    console.log(itemEl.querySelector('h2').getAttribute('data-id'));
+
+    // Call the PUT card API
+    fetch(`/api/cards/${itemEl.querySelector('h2').getAttribute('data-id')}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        status: columnId.replace('-list', '')
+      })
+    });
+
+    updateProgressBar();
   }
 };
 
@@ -43,11 +56,13 @@ Sortable.create(document.getElementById('done-list'), sortableOptions);
 
 // Function to update progress bar
 function updateProgressBar() {
+  // fix this!
   var inProgressCount = document.getElementById('in-progress-list').children.length;
   var doneCount = document.getElementById('done-list').children.length;
+  var todoCount = document.getElementById('todo-list').children.length;
 
   // Calculate percentage completion
-  var totalTasks = inProgressCount + doneCount;
+  var totalTasks = inProgressCount + doneCount + todoCount;
   var progressPercent = totalTasks > 0 ? Math.floor((doneCount / totalTasks) * 100) : 0;
 
   // Update progress bar width
@@ -62,27 +77,44 @@ var formTodo = document.getElementById('form-todo');
 formTodo.addEventListener('submit', function (event) {
   event.preventDefault();
   var cardTitle = document.getElementById('new-card-title-todo').value.trim();
-  var cardContent = document.getElementById('new-card-content-todo').value.trim();
+  var cardDescription = document.getElementById('new-card-description-todo').value.trim();
   var assignee = document.getElementById('new-card-assignee-todo').value.trim();
-  
-  if (cardContent !== '') {
-    var card = createCard(cardTitle, cardContent, assignee);
-    document.getElementById('todo-list').appendChild(card);
+
+  if (cardDescription !== '') {
     // Call API
-    fetch('/api/cards', {
+    const response = fetch('/api/cards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title: cardTitle,
-        content: cardContent,
+        description: cardDescription,
         assignee: assignee,
         status: 'todo'
-      }) 
+      })
     });
-    document.getElementById('new-card-content-todo').value = '';
-    document.getElementById('new-card-assignee-todo').value = '';
+
+    response
+      .then((response) => {
+        if (response.status >= 400) {
+          alert('Error adding card:', response);
+          return;
+        }
+        response.json().then((data) => {
+          console.log(data);
+          var card = createCard(data.id, cardTitle, cardDescription, assignee);
+          document.getElementById('todo-list').appendChild(card);
+          document.getElementById('new-card-description-todo').value = '';
+          document.getElementById('new-card-assignee-todo').value = '';
+
+          // After adding a card to In Progress, update progress bar
+          updateProgressBar();
+        });
+      })
+      .catch((error) => {
+        alert('Error adding card:', error);
+      });
   }
 });
 
@@ -90,17 +122,44 @@ formTodo.addEventListener('submit', function (event) {
 var formInProgress = document.getElementById('form-in-progress');
 formInProgress.addEventListener('submit', function (event) {
   event.preventDefault();
-  var cardContent = document.getElementById('new-card-content-in-progress').value.trim();
+  var cardTitle = document.getElementById('new-card-title-in-progress').value.trim();
+  var cardDescription = document.getElementById('new-card-description-in-progress').value.trim();
   var assignee = document.getElementById('new-card-assignee-in-progress').value.trim();
 
-  if (cardContent !== '') {
-    var card = createCard(cardContent, assignee);
-    document.getElementById('in-progress-list').appendChild(card);
-    document.getElementById('new-card-content-in-progress').value = '';
-    document.getElementById('new-card-assignee-in-progress').value = '';
+  if (cardDescription !== '') {
+    const response = fetch('/api/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: cardTitle,
+        description: cardDescription,
+        assignee: assignee,
+        status: 'in-progress'
+      })
+    });
 
-    // After adding a card to In Progress, update progress bar
-    updateProgressBar();
+    response
+      .then((response) => {
+        if (response.status >= 400) {
+          alert('Error adding card:', response);
+          return;
+        }
+        response.json().then((data) => {
+
+          var card = createCard(data.id, cardTitle, cardDescription, assignee);
+          document.getElementById('in-progress-list').appendChild(card);
+          document.getElementById('new-card-description-in-progress').value = '';
+          document.getElementById('new-card-assignee-in-progress').value = '';
+
+          // After adding a card to In Progress, update progress bar
+          updateProgressBar();
+        });
+      })
+      .catch((error) => {
+        alert('Error adding card:', error);
+      });
   }
 });
 
@@ -108,17 +167,42 @@ formInProgress.addEventListener('submit', function (event) {
 var formDone = document.getElementById('form-done');
 formDone.addEventListener('submit', function (event) {
   event.preventDefault();
-  var cardContent = document.getElementById('new-card-content-done').value.trim();
+  var cardTitle = document.getElementById('new-card-title-done').value.trim();
+  var cardDescription = document.getElementById('new-card-description-done').value.trim();
   var assignee = document.getElementById('new-card-assignee-done').value.trim();
 
-  if (cardContent !== '') {
-    var card = createCard(cardContent, assignee);
-    document.getElementById('done-list').appendChild(card);
-    document.getElementById('new-card-content-done').value = '';
-    document.getElementById('new-card-assignee-done').value = '';
+  if (cardDescription !== '') {
+    const response = fetch('/api/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: cardTitle,
+        description: cardDescription,
+        assignee: assignee,
+        status: 'done'
+      })
+    });
 
-    // After adding a card to Done, update progress bar
-    updateProgressBar();
+    response
+      .then((response) => {
+        if (response.status >= 400) {
+          alert('Error adding card:', response);
+          return;
+        }
+        response.json().then((data) => {
+
+          var card = createCard(data.id, cardTitle, cardDescription, assignee);
+          document.getElementById('done-list').appendChild(card);
+          document.getElementById('new-card-description-done').value = '';
+          document.getElementById('new-card-assignee-done').value = '';
+          updateProgressBar();
+        });
+      })
+      .catch((error) => {
+        alert('Error adding card:', error);
+      });
   }
 });
 
@@ -133,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((data) => {
       // Loop through each card and create a card element
       data.forEach((card) => {
-        var cardElement = createCard(card.content, card.assignee);
+        var cardElement = createCard(card.id, card.title, card.description, card.assignee);
 
         // Append card to the correct column based on status
         if (card.status === "todo") {

@@ -8,51 +8,40 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 
 // Import models
 const User = require('./user')(sequelize);
-const Board = require('./board')(sequelize);
+// const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
-// const Comment = require('./comment')(sequelize);
 
 // Define relationships
-Board.hasMany(Card, {
-  foreignKey: 'boardId',
-  onDelete: 'CASCADE',
-});
-
-Card.belongsTo(Board, {
-  foreignKey: 'boardId',
-});
-
-User.hasMany(Board, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE',
-});
-
-Board.belongsTo(User, {
-  foreignKey: 'userId',
-});
-
-// Card.hasOne(User, {
-//   foreignKey: 'assignee',
-//   onDelete: 'SET NULL',
-// });
-
-// This might be wrong
-// User.belongsTo(Card, {
-//   foreignKey: 'assignee',
-// });
-
-// Define Comment relationships
-// Comment.belongsTo(Card, {
-//   foreignKey: 'cardId',
+// Board.hasMany(Card, {
+//   foreignKey: 'boardId',
 //   onDelete: 'CASCADE',
 // });
 
-// Comment.belongsTo(User, {
+// Card.belongsTo(Board, {
+//   foreignKey: 'boardId',
+// });
+
+// User.hasMany(Board, {
 //   foreignKey: 'userId',
 //   onDelete: 'CASCADE',
 // });
 
+// Board.belongsTo(User, {
+//   foreignKey: 'userId',
+// });
 
-module.exports = { sequelize, Board, User, Card, 
+Card.hasOne(User, {
+  foreignKey: 'email',
+  onDelete: 'SET NULL',
+});
+
+// This might be wrong
+User.belongsTo(Card, {
+  foreignKey: 'email',
+});
+
+module.exports = { sequelize,
+  // Board, 
+  User, Card, 
   // Comment 
 };

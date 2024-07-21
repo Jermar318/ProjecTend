@@ -24,21 +24,27 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: Status.TODO
       },
-      boardId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'boards',
-          key: 'id',
-        },
-      },
+      // boardId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: 'boards',
+      //     key: 'id',
+      //   },
+      // },
       assignee: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+          model: 'user',
+          key: 'email',
+        }
       }
     },
     {
       sequelize,
       modelName: 'card',
+      timestamps: false,
     }
   );
 
