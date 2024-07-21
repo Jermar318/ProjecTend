@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const Status = require('../public/scripts/status');
+const Status = require('../constants/status');
 
 module.exports = (sequelize) => {
   class Card extends Model {}
@@ -24,22 +24,19 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: Status.TODO
       },
-      boardId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'boards',
-          key: 'id',
-        },
-      },
       assignee: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+          model: 'user',
+          key: 'email',
+        }
       }
     },
     {
       sequelize,
       modelName: 'card',
-      tableName: 'cards',
+      timestamps: false,
     }
   );
 
