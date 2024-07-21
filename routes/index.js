@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const apiRoutes = require("./api/connector.js");
-const isAuthenicated = require('./config/middleware/isAuthenicated.js');
+//const isAuthenicated = require('../public/utils/isAuthenticated.js');
 
 router.use('/api', apiRoutes);
 
-router.get('/', isAuthenicated, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         res.render('homepage', {});
     } catch (err) {
