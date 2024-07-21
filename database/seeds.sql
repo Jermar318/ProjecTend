@@ -16,6 +16,6 @@ INSERT INTO "user" (email, password) VALUES
 -- Assuming these cards belong to the first board
 TRUNCATE TABLE cards;
 INSERT INTO cards (title, description, status, assignee) VALUES
-('Card 1', 'Description for Card 1', 'todo', 1),
-('Card 2', 'Description for Card 2', 'in-progress', 2),
-('Card 3', 'Description for Card 3', 'done', 3);
+('Card 1', 'Description for Card 1', 'todo', 'user1@example.com'),
+('Card 2', 'Description for Card 2', 'in-progress', 'user2@example.com'),
+('Card 3', 'Description for Card 3', 'done', 'user3@example.com');
