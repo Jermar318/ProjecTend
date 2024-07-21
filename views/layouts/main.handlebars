@@ -15,10 +15,13 @@
     </div>
     <nav>
       <ul>
+        {{#if logged_in}}
         <li><a href="/">Home</a></li>
+        <li><a href="/logout">Logout</a></li>
+        {{else}}
         <li><a href="/signup">Signup</a></li>
         <li><a href="/login">Login</a></li>
-        <li><a href="/logout">Logout</a></li>
+        {{/if}}
       </ul>
     </nav>
   </header>
@@ -29,7 +32,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-  <script type="module" src="/scripts/script.js"></script>
 </body>
 
 </html>

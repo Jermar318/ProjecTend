@@ -4,8 +4,22 @@ const apiRoutes = require("./api/connector.js");
 
 router.use('/api', apiRoutes);
 
+// Render signup page
+// router.get('/signup', (req, res) => {
+//     res.render('signup', {
+//     //   layout: 'signup',
+//     //   title: 'Signup'
+//     });
+//   });
+
 router.get('/', async (req, res) => {
     try {
+        if (req.session.logged_in) {
+            res.render('homepage', { logged_in: true });
+            return;
+        } else {
+            res.render('login', {});
+        }
         res.render('homepage', {});
     } catch (err) {
         res.status(500).json(err);
