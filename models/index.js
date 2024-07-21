@@ -72,6 +72,3 @@ Task.belongsTo(Board, {
 
 
 module.exports = { sequelize, Board, User, Card, Comment, Task }; // Added Task to the exports
-module.exports = { sequelize, Board, User, Card, 
-  // Comment 
-};
