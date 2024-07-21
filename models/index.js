@@ -7,12 +7,15 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 // Import models
-const User = require('./user')(sequelize);
+const User = require('./users')(sequelize);
 const Board = require('./board')(sequelize);
 const Card = require('./card')(sequelize);
 // const Comment = require('./comment')(sequelize);
+const Comment = require('./comment')(sequelize);
+const Task = require('./task.js')(sequelize);
 
 // Define relationships
+
 Board.hasMany(Card, {
   foreignKey: 'boardId',
   onDelete: 'CASCADE',
@@ -52,7 +55,20 @@ Board.belongsTo(User, {
 //   onDelete: 'CASCADE',
 // });
 
+Task.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
 
-module.exports = { sequelize, Board, User, Card, 
-  // Comment 
-};
+Task.belongsTo(Card, {
+  foreignKey: 'cardId',
+  onDelete: 'CASCADE',
+});
+
+Task.belongsTo(Board, {
+  foreignKey: 'boardId',
+  onDelete: 'CASCADE',
+});
+
+
+module.exports = { sequelize, Board, User, Card, Comment, Task }; // Added Task to the exports
