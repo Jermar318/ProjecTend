@@ -1,13 +1,12 @@
-# <Your-Project-Title>
+# <ProjecTend>
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Track progress and multiple stages of a project, including each group member's specific participation within that project.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+The motivation for creating ProjecTend stemmed from a desire to simplify and enhance team collaboration and project tracking. I wanted to build a tool that makes it easy for teams to stay organized, visualize progress, and ensure that tasks are managed efficiently. ProjecTend is designed to turn complex project management into a straightforward and engaging experience, helping teams achieve their goals with greater clarity and ease.
+
+What was learned during the creation of this site was how to create and implement a restful api, how to incorporate SortableJS into the UI, and how to make a UI that interacts with an API.
 
 ## Table of Contents (Optional)
 
@@ -20,48 +19,21 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+setup .env from .env example, run npm install, npm start, visit http://localhost:3002/
 
 ## Usage
 
 Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+![Usage and Functionality](https://drive.google.com/file/d/1vOs5oO-9WOYsNLdrk9lSpuELiCrQdYQC/view?usp=sharing)
+    
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+Collaborators: ![Brandee Cheung](https://github.com/brandeecheung), ![Brian Sanchez](https://github.com/bds6575), ![Jermar Smith](https://github.com/Jermar318)
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+Third Party Assets: ![SortableJS](https://github.com/SortableJS/Sortable)
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+![MIT License ](https://choosealicense.com/licenses/mit/).
 
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
