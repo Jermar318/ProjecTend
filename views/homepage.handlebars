@@ -1,4 +1,3 @@
-
     <div class="progress-bar">
       <div class="progress-bar-inner" style="width: {{progress}}%;"></div>
     </div>
@@ -10,7 +9,7 @@
         </div>
         <form id="form-todo">
           <input type="text" id="new-card-title-todo" placeholder="Card title">
-          <input type="text" id="new-card-content-todo" placeholder="Card content">
+          <input type="text" id="new-card-description-todo" placeholder="Card description">
           <input type="text" id="new-card-assignee-todo" placeholder="Assignee">
           <button type="submit">Add Card</button>
         </form>
@@ -22,7 +21,8 @@
           <!-- Cards will be populated here -->
         </div>
         <form id="form-in-progress">
-          <input type="text" id="new-card-content-in-progress" placeholder="Card content">
+          <input type="text" id="new-card-title-in-progress" placeholder="Card title">
+          <input type="text" id="new-card-description-in-progress" placeholder="Card description">
           <input type="text" id="new-card-assignee-in-progress" placeholder="Assignee">
           <button type="submit">Add Card</button>
         </form>
@@ -34,10 +34,11 @@
           <!-- Cards will be populated here -->
         </div>
         <form id="form-done">
-          <input type="text" id="new-card-content-done" placeholder="Card content">
+          <input type="text" id="new-card-title-done" placeholder="Card title">
+          <input type="text" id="new-card-description-done" placeholder="Card description">
           <input type="text" id="new-card-assignee-done" placeholder="Assignee">
           <button type="submit">Add Card</button>
         </form>
       </div>
     </div>
-
+      <script type="module" src="/scripts/script.js"></script>

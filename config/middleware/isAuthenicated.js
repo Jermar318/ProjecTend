@@ -1,3 +1,4 @@
+// Middleware function to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {
     // Check if the user is logged in
     if (req.isAuthenticated()) {

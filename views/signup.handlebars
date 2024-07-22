@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+
 <head>
     <title>Sign Up Page</title>
     <style>
@@ -9,6 +9,7 @@
             padding: 0;
             background-color: #f0f0f0;
         }
+
         .form-container {
             display: flex;
             justify-content: center;
@@ -17,18 +18,23 @@
             gap: 20px;
             padding: 50px;
         }
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
-        input[type="text"], input[type="password"], input[type="email"] {
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
             padding: 10px;
             width: 200px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+
         input[type="submit"] {
             padding: 10px 20px;
             border-radius: 5px;
@@ -37,28 +43,32 @@
             background-color: #4CAF50;
             cursor: pointer;
         }
+
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
         h2 {
             margin-top: 0;
         }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <h2>Sign Up</h2>
-        <form action="/signup" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+        {{#if error}}
+        <p class="error-message">{{error}}</p>
+        {{/if}}
+        <form action="/api/signup" method="post">
+            {{!-- <label for="username">Username:</label>
+            <input type="text" id="username" name="username"> --}}
             <label for="email">Email:</label>
             <input type="email" id="email" name="email">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
             <input type="submit" value="Sign Up">
         </form>
     </div>
-</footer>
-<script type="module" src="/scripts/signup.js"></script>
 </body>
-</html>

@@ -1,14 +1,28 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const routes = require('./routes'); // Assuming you have a routes file
 const { sequelize } = require('./models'); // Assuming you have Sequelize models
 const exphbs = require('express-handlebars');
 const path = require('path');
+const session = require('express-session');
+
 
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3002;
+
+const sess = {
+    secret: 'Super secret secret',
+    resave: false,
+    saveUninitialized: false,
+};
+
+app.use(session(sess));
+
+app.use(function (req, res, next) {
+    res.locals.logged_in = req.session.logged_in;
+    next();
+});
 
 // Configure Handlebars
 const hbs = exphbs.create();
@@ -19,16 +33,15 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true })); // to parse the body of POST requests
 
 // Routes
 app.use(routes); // Assuming routes are defined in a separate file
 
 app.get('/', (req, res) => {
     try {
-        res.json({test: 'hi'});
+        res.json({ test: 'hi' });
     } catch (err) {
-        res.json({error: err});
+        res.json({ error: err });
     }
 });
 

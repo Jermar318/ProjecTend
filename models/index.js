@@ -7,68 +7,19 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 // Import models
-const User = require('./users')(sequelize);
-const Board = require('./board')(sequelize);
+const User = require('./user')(sequelize);
 const Card = require('./card')(sequelize);
-// const Comment = require('./comment')(sequelize);
-const Comment = require('./comment')(sequelize);
-const Task = require('./task.js')(sequelize);
 
-// Define relationships
-
-Board.hasMany(Card, {
-  foreignKey: 'boardId',
-  onDelete: 'CASCADE',
+Card.hasOne(User, {
+  foreignKey: 'email',
+  onDelete: 'SET NULL',
 });
-
-Card.belongsTo(Board, {
-  foreignKey: 'boardId',
-});
-
-User.hasMany(Board, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE',
-});
-
-Board.belongsTo(User, {
-  foreignKey: 'userId',
-});
-
-// Card.hasOne(User, {
-//   foreignKey: 'assignee',
-//   onDelete: 'SET NULL',
-// });
 
 // This might be wrong
-// User.belongsTo(Card, {
-//   foreignKey: 'assignee',
-// });
-
-// Define Comment relationships
-// Comment.belongsTo(Card, {
-//   foreignKey: 'cardId',
-//   onDelete: 'CASCADE',
-// });
-
-// Comment.belongsTo(User, {
-//   foreignKey: 'userId',
-//   onDelete: 'CASCADE',
-// });
-
-Task.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE',
+User.belongsTo(Card, {
+  foreignKey: 'email',
 });
 
-Task.belongsTo(Card, {
-  foreignKey: 'cardId',
-  onDelete: 'CASCADE',
-});
-
-Task.belongsTo(Board, {
-  foreignKey: 'boardId',
-  onDelete: 'CASCADE',
-});
-
-
-module.exports = { sequelize, Board, User, Card, Comment, Task }; // Added Task to the exports
+module.exports = { sequelize,
+  User, Card, 
+};
