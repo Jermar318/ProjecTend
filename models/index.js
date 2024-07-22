@@ -1,10 +1,16 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
+let sequelize;
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT,
-});
+if (process.env.DB_URL) {
+   sequelize = new Sequelize(process.env.DB_URL);
+
+} else {
+   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  });
+}
 
 // Import models
 const User = require('./user')(sequelize);
@@ -20,6 +26,7 @@ User.belongsTo(Card, {
   foreignKey: 'email',
 });
 
-module.exports = { sequelize,
-  User, Card, 
+module.exports = {
+  sequelize,
+  User, Card,
 };
