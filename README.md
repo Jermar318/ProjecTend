@@ -29,6 +29,8 @@ Provide instructions and examples for use. Include screenshots as needed.
 
 ## Credits
 
+Repository: ![Github link](https://github.com/Jermar318/ProjecTend)
+
 Collaborators: ![Brandee Cheung](https://github.com/brandeecheung), ![Brian Sanchez](https://github.com/bds6575), ![Jermar Smith](https://github.com/Jermar318)
 
 Third Party Assets: ![SortableJS](https://github.com/SortableJS/Sortable)
