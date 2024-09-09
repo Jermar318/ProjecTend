@@ -4,6 +4,7 @@ const { sequelize } = require('./models'); // Assuming you have Sequelize models
 const exphbs = require('express-handlebars');
 const path = require('path');
 const session = require('express-session');
+const router = require('./routes');
 
 
 require('dotenv').config();
@@ -35,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use(routes); // Assuming routes are defined in a separate file
+app.use(router); // Assuming routes are defined in a separate file
 
 app.get('/', (req, res) => {
     try {
